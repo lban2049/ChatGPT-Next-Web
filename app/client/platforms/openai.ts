@@ -19,7 +19,7 @@ export class ChatGPTApi implements LLMApi {
     const { enableAOAI, azureDeployName } = useAccessStore.getState();
     if (!enableAOAI) return OPENAI_REQUEST_PATH;
 
-    const AZURE_REQUEST_PATH = `openai/deployments/${azureDeployName}/chat/completions?api-version=2023-03-15-preview`;
+    const AZURE_REQUEST_PATH = `openai/deployments/${azureDeployName}/completions?api-version=2023-05-15`;
     return AZURE_REQUEST_PATH;
   }
 
@@ -65,7 +65,7 @@ export class ChatGPTApi implements LLMApi {
     options.onController?.(controller);
 
     try {
-      const chatPath = this.path(OpenaiPath.ChatPath);
+      const chatPath = this.path(this.ChatPath);
       const chatPayload = {
         method: "POST",
         body: JSON.stringify(requestPayload),
